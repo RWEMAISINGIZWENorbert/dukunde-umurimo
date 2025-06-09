@@ -37,12 +37,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        // Logout the user
         Auth::guard('web')->logout();
 
+        // Invalidate the session
         $request->session()->invalidate();
 
+        // Regenerate CSRF token
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        // Clear all session data
+        $request->session()->flush();
+
+        // Clear all cookies
+        $cookies = $request->cookies->all();
+        foreach ($cookies as $name => $value) {
+            cookie()->queue(cookie()->forget($name));
+        }
+
+        // Redirect to login with a message
+        return redirect()->route('login')->with('status', 'You have been successfully logged out.');
     }
 }
