@@ -55,7 +55,7 @@ class AuthenticatedSessionController extends Controller
             cookie()->queue(cookie()->forget($name));
         }
 
-        // Redirect to login with a message
-        return redirect()->route('login')->with('status', 'You have been successfully logged out.');
+        // Redirect to landing page with a message
+        return redirect('/')->with('status', 'You have been successfully logged out.');
     }
 }

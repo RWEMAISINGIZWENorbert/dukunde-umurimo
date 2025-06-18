@@ -318,6 +318,19 @@
         <!-- Hero Section -->
         <section class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
             <div class="absolute inset-0 bg-black opacity-5"></div>
+            
+            <!-- Success Message -->
+            @if (session('status'))
+                <div class="absolute top-24 left-1/2 transform -translate-x-1/2 z-20 bg-white/90 backdrop-blur-sm rounded-xl px-6 py-4 shadow-lg border border-white/20">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center">
+                            <i class="fas fa-check text-green-600 text-sm"></i>
+                        </div>
+                        <span class="text-gray-800 font-medium">{{ session('status') }}</span>
+                    </div>
+                </div>
+            @endif
+            
             <div class="relative z-10 text-center px-4 sm:px-6 lg:px-8 animate-fade-in">
                 <div class="max-w-5xl mx-auto">
                     <h1 class="text-5xl md:text-7xl font-black text-white mb-8 leading-tight animate-slide-up">
